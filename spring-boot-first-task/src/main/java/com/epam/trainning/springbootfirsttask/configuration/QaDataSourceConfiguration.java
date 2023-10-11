@@ -43,7 +43,7 @@ class QaDataSourceConfiguration {
 
     @Bean
     @ConditionalOnBean(name = "qaDataSource")
-    CommandLineRunner initQaDatabase(EmployeeRepository repository) {
+    protected CommandLineRunner initQaDatabase(EmployeeRepository repository) {
         return args -> {
             LOGGER.info("Preloading " + repository.save(new Employee("Main QA burglar")));
             LOGGER.info("Preloading " + repository.save(new Employee("Main QA thief")));

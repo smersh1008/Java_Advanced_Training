@@ -43,7 +43,7 @@ class DevDataSourceConfiguration {
 
     @Bean
     @ConditionalOnBean(name = "devDataSource")
-    CommandLineRunner initDevDatabase(EmployeeRepository repository) {
+    protected CommandLineRunner initDevDatabase(EmployeeRepository repository) {
         return args -> {
             LOGGER.info("Preloading " + repository.save(new Employee("Main DEV burglar")));
             LOGGER.info("Preloading " + repository.save(new Employee("Main DEV thief")));

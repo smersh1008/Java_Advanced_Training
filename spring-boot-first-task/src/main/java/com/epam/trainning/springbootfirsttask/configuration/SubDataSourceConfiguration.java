@@ -39,7 +39,7 @@ class SubDataSourceConfiguration {
 
     @Bean
     @ConditionalOnBean(name = "subDataSource")
-    CommandLineRunner initSubDatabase(EmployeeRepository repository) {
+    protected CommandLineRunner initSubDatabase(EmployeeRepository repository) {
         return args -> {
             LOGGER.info("Preloading " + repository.save(new Employee("Sub burglar")));
             LOGGER.info("Preloading " + repository.save(new Employee("Sub thief")));

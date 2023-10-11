@@ -1,5 +1,6 @@
 package com.epam.trainning.springbootfirsttask.controller;
 
+import com.epam.trainning.springbootfirsttask.exception.DataNotFoundException;
 import com.epam.trainning.springbootfirsttask.model.Employee;
 import com.epam.trainning.springbootfirsttask.repository.EmployeeRepository;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,28 +17,28 @@ import org.springframework.web.bind.annotation.RestController;
 public class EmployeeController {
     private final EmployeeRepository repository;
 
-    EmployeeController(EmployeeRepository repository) {
+    public EmployeeController(EmployeeRepository repository) {
         this.repository = repository;
     }
 
     @GetMapping("/employees/{id}")
-    Employee getEmployee(@PathVariable Long id) {
+    public Employee getEmployee(@PathVariable Long id) {
         return repository.findById(id)
-                .orElseThrow(() -> new NullPointerException(String.format("Employee by id='%d' is not found!", id)));
+                .orElseThrow(() -> new DataNotFoundException(String.format("Employee by id='%d' is not found!", id)));
     }
 
     @PostMapping("/employees")
-    Employee createEmployee(@RequestBody Employee newEmployee) {
+    public Employee createEmployee(@RequestBody Employee newEmployee) {
         return repository.save(newEmployee);
     }
 
     @GetMapping("/employees")
-    Iterable<Employee> getEmployees() {
+    public Iterable<Employee> getEmployees() {
         return repository.findAll();
     }
 
     @PutMapping("/employees/{id}")
-    Employee replaceEmployee(@RequestBody Employee newEmployee, @PathVariable Long id) {
+    public Employee replaceEmployee(@RequestBody Employee newEmployee, @PathVariable Long id) {
         return repository.findById(id)
                 .map(employee -> {
                     employee.setName(newEmployee.getName());
@@ -50,7 +51,7 @@ public class EmployeeController {
     }
 
     @DeleteMapping("/employees/{id}")
-    void deleteEmployee(@PathVariable Long id) {
+    public void deleteEmployee(@PathVariable Long id) {
         repository.deleteById(id);
     }
 }
