@@ -1,3 +1,5 @@
+## Assuming that Python 3.11 is installed. Next commands should be run in the root folder of that project
+
 ## Install gRPC tools
 pip install grpcio-tools
 
