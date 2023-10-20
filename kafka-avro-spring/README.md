@@ -20,8 +20,8 @@ In the Spring Boot application console should be visible Producer and Consumer l
 
 1. Stop Spring Boot application; 
 2. open 'pom.xml' file; 
-3. navigate to 'avro-maven-plugin' configuration; 
-4. update <include>user-v1.avsc</include> with <include>user-v2.avsc</include> (114 line of 'pom.xml');
+3. navigate to properties; 
+4. update 'user.data.version' property from 'user-v1.avsc' to 'user-v2.avsc';
 5. run 'mvn clean package';
 6. start Spring Boot application;
 7. after v2 message is sent, on Kafka UI -> Schema Registry page 'user-data' schema version should be updated and

@@ -17,14 +17,8 @@
 		<java.version>17</java.version>
 		<avro.version>1.11.3</avro.version>
 		<confluent.version>7.2.1</confluent.version>
+		<user.data.version>user-v1.avsc</user.data.version>
 	</properties>
-
-	<repositories>
-		<repository>
-			<id>confluent</id>
-			<url>https://packages.confluent.io/maven/</url>
-		</repository>
-	</repositories>
 
 	<dependencies>
 		<dependency>
@@ -65,7 +59,14 @@
 			<artifactId>spring-kafka-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-	</dependencies>
+    </dependencies>
+
+    <repositories>
+        <repository>
+            <id>confluent</id>
+            <url>https://packages.confluent.io/maven/</url>
+        </repository>
+    </repositories>
 
 	<build>
 		<plugins>
@@ -111,7 +112,7 @@
 							<sourceDirectory>${project.basedir}/src/main/resources/avro/</sourceDirectory>
 							<outputDirectory>${project.basedir}/src/main/java/</outputDirectory>
 							<includes>
-								<include>user-v1.avsc</include>
+								<include>${user.data.version}</include>
 							</includes>
 							<fieldVisibility>PRIVATE</fieldVisibility>
 							<stringType>String</stringType>
@@ -119,7 +120,27 @@
 					</execution>
 				</executions>
 			</plugin>
+<!--			<plugin>-->
+<!--                <groupId>io.confluent</groupId>-->
+<!--                <artifactId>kafka-schema-registry-maven-plugin</artifactId>-->
+<!--                <version>7.2.1</version>-->
+<!--				<executions>-->
+<!--					<execution>-->
+<!--						<phase>compile</phase>-->
+<!--						<goals>-->
+<!--							<goal>register</goal>-->
+<!--						</goals>-->
+<!--						<configuration>-->
+<!--							<schemaRegistryUrls>-->
+<!--								<param>http://localhost:8085</param>-->
+<!--							</schemaRegistryUrls>-->
+<!--							<subjects>-->
+<!--								<user-data-value1>${project.basedir}/src/main/resources/avro/${user.data.version}</user-data-value1>-->
+<!--							</subjects>-->
+<!--						</configuration>-->
+<!--					</execution>-->
+<!--				</executions>-->
+<!--			</plugin>-->
 		</plugins>
 	</build>
-
 </project>
