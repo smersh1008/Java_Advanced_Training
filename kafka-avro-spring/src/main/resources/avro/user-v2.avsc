@@ -1,0 +1,20 @@
+{
+  "type": "record",
+  "name": "UserData",
+  "namespace": "com.epam.trainning.model",
+  "version": 2,
+  "fields": [
+    {
+      "name": "firstName",
+      "type": "string"
+    },
+    {
+      "name": "lastName",
+      "type": "string"
+    },
+    {
+      "name": "fired",
+      "type": "boolean",
+      "default": false
+    }]
+}
