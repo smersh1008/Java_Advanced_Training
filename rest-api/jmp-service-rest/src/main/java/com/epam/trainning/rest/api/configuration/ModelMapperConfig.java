@@ -1,6 +1,7 @@
 package com.epam.trainning.rest.api.configuration;
 
 import com.epam.trainning.rest.api.dto.SubscriptionResponseDto;
+import com.epam.trainning.rest.api.dto.UserRequestDto;
 import com.epam.trainning.rest.api.dto.UserResponseDto;
 import com.epam.trainning.rest.api.model.Subscription;
 import com.epam.trainning.rest.api.model.User;
@@ -28,12 +29,10 @@ public class ModelMapperConfig {
                     mapper.map(subscription -> subscription.getUser().getId(), SubscriptionResponseDto::setUserId);
                     mapper.using(localDateToStr).map(Subscription::getStartDate, SubscriptionResponseDto::setStartDate);
                 });
-        modelMapper.createTypeMap(SubscriptionResponseDto.class, Subscription.class)
-                .addMappings(mapper -> mapper.using(strToLocalDate).map(SubscriptionResponseDto::getStartDate, Subscription::setStartDate));
         modelMapper.createTypeMap(User.class, UserResponseDto.class)
                 .addMappings(mapper -> mapper.using(localDateToStr).map(User::getBirthday, UserResponseDto::setBirthday));
-        modelMapper.createTypeMap(UserResponseDto.class, User.class)
-                .addMappings(mapper -> mapper.using(strToLocalDate).map(UserResponseDto::getBirthday, User::setBirthday));
+        modelMapper.createTypeMap(UserRequestDto.class, User.class)
+                .addMappings(mapper -> mapper.using(strToLocalDate).map(UserRequestDto::getBirthday, User::setBirthday));
         return modelMapper;
     }
 }
